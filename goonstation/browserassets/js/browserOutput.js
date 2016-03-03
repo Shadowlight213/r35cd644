@@ -791,6 +791,8 @@ $(function() {
 				'<a href="#" data-font="Times New Roman" style="font-family: Times New Roman;">Times New Roman</a>'+
 				'<a href="#" data-font="Georgia" style="font-family: Georgia;">Georgia</a>'+
 				'<a href="#" data-font="Verdana" style="font-family: Verdana;">Verdana</a>'+
+				'<a href="#" data-font="Wingdings" style="font-family: Wingdings;">Wingdings</a>'+
+				'<a href="#" data-font="Comic Sans MS" style="font-family: Comic Sans MS;">Comic Sans MS</a>'+
 				'<a href="#" data-font="Courier New" style="font-family: Courier New;">Courier New</a>'+
 				'<a href="#" data-font="Lucida Console" style="font-family: Lucida Console;">Lucida Console</a>'+
 			'</div>';
