@@ -32,6 +32,8 @@
 //(this doesn't use the 'step' var thing because we need the response here and now)
 /proc/checkBan(ckey, compID, ip)
 	set background = 1
+	return 0
+/*
 	if (!ckey && !compID && !ip)
 		logTheThing("debug", null, null, "<b>Bans Error</b>: No details passed to <b>checkBan</b>")
 		logTheThing("diary", null, null, "Bans Error: No details passed to checkBan", "debug")
@@ -123,7 +125,7 @@
 		return details
 
 	return 0 //Should never occur
-
+*/
 
 /proc/addBan(step = 1, data)
 	set background = 1
@@ -224,6 +226,10 @@
 //Starts the dialog for banning a dude
 /client/proc/addBanDialog(target)
 	if (src.holder && usr.level >= LEVEL_SA)
+		alert("Please use tg code to actually make bans.")
+		return
+/*
+
 		var/mob/M
 		var/mobRef = 0
 		if (target && istype(target, /mob/))
@@ -296,7 +302,7 @@
 	else
 		alert("You need to be at least a Secondary Administrator to ban players.")
 		return 1
-
+*/
 
 //Admin verb to add bans
 /client/proc/cmd_admin_addban ()
@@ -362,7 +368,10 @@
 
 /client/proc/editBanDialog(id, ckey, compID, ip, oreason, otimestamp)
 	if (src.holder && usr.level >= LEVEL_SA)
-		var/CMinutes = (world.realtime / 10) / 60
+		alert("Editing bans isn't supported! Please use tg code for that!")
+		return
+
+/*		var/CMinutes = (world.realtime / 10) / 60
 		var/remaining = (text2num(otimestamp) - CMinutes)
 		if(!remaining || remaining < 0) remaining = 0
 
@@ -418,6 +427,7 @@
 		editBan(1, data)
 
 		src.holder.banPanel()
+*/
 	else
 		alert("You need to be at least a Secondary Administrator to ban players.")
 		return 1
@@ -475,7 +485,9 @@
 
 /client/proc/deleteBanDialog(id, ckey, compID, ip, akey)
 	if (src.holder && usr.level >= LEVEL_SA)
-		if(alert(usr, "Are you sure you want to unban [ckey]?", "Confirmation", "Yes", "No") == "Yes")
+		alert("Unbans aren't supported. Please use TG code.")
+		return
+/*		if(alert(usr, "Are you sure you want to unban [ckey]?", "Confirmation", "Yes", "No") == "Yes")
 			var/data[] = new()
 			data["id"] = id
 			data["ckey"] = ckey
@@ -484,6 +496,7 @@
 			data["akey"] = akey
 			deleteBan(1, data)
 			src.holder.banPanel()
+*/
 	else
 		alert("You need to be at least a Secondary Administrator to remove bans.")
 
@@ -578,7 +591,10 @@
 //DEBUG (gets the latest ban and prints it out)
 /proc/debugBans(step, data)
 	set background = 1
+	alert("If you wanna completely revamp goon's ban system be my guest. This is just a test run.")
+	return
 
+/*
 	if (step == 1)
 		queryAPI("bans/debug")
 
@@ -591,7 +607,7 @@
 			for (var/i = 1, i <= details.len, i++) //each item for this ban
 				boutput(world, "[details[i]]: [details[details[i]]]")
 
-
+*/
 /////////////////////////
 // LOCAL AND REMOTE DB SYNCHRONISATION
 /////////////////////////
@@ -797,6 +813,8 @@
 
 
 /proc/debugToggleCentralConn()
+	return "centralConn locked OFF"
+/*
 	if (centralConn)
 		centralConn = 0
 		centralConnTries = 5
@@ -806,3 +824,4 @@
 		centralConnTries = 0
 		return "Set centralConn ON"
 
+*/

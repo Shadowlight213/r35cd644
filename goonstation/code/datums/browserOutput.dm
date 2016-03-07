@@ -136,7 +136,8 @@ var/global
 
 		//Called by client, sent data to investigate (cookie history so far)
 		analyzeClientData(cookie = "")
-			if (!cookie) return
+			return	//Goof ate all the cookies from the cookie jar. RIP
+			/*if (!cookie) return
 			if (cookie != "none")
 				var/list/connData = json2list(cookie)
 				if (connData && islist(connData) && connData.len > 0 && connData["connData"])
@@ -165,7 +166,7 @@ var/global
 							ircmsg["msg"] = "has a cookie from banned account [found["ckey"]](IP: [found["ip"]], CompID: [found["compID"]])"
 							ircbot.export("admin", ircmsg)
 			src.cookieSent = 1
-
+*/
 		//Called in New() (/datum/admins)
 		getContextFlag()
 			if (!src.owner.holder) return

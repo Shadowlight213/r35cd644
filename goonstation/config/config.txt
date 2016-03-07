@@ -1,0 +1,26 @@
+## log OOC channel
+LOG_OOC
+
+## log client Say
+LOG_SAY
+
+## log admin actions
+LOG_ADMIN
+
+## log client access (logon/logoff)
+LOG_ACCESS
+
+## log game actions (start of round, results, etc.)
+LOG_GAME
+
+
+
+
+
+USE_MYSQL
+
+MYSQL_HOSTNAME localhost
+MYSQL_PORT 3306
+MYSQL_USERNAME usernamehere
+MYSQL_PASSWORD passwordhere
+MYSQL_DATBASE feedback

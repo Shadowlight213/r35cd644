@@ -129,7 +129,7 @@
 	name = "Head of Security"
 	limit = 1
 	wages = 750
-	requires_whitelist = 1
+	requires_whitelist = 0
 	recieves_miranda = 1
 	allow_traitors = 0
 	cant_spawn_as_rev = 1

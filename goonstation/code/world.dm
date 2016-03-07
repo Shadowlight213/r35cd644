@@ -399,6 +399,12 @@ var/f_color_selector_handler/F_Color_Selector
 	build_syndi_buylist_cache()
 	build_camera_network()
 
+	if(setup_database_connection())
+		world.log << "DB connection established"
+	else
+		world.log << "DB connect fail"
+
+
 	return
 
 
@@ -883,3 +889,43 @@ var/opt_inactive = null
 			del(C)
 
 /// EXPERIMENTAL STUFF
+
+#define FAILED_DB_CONNECTION_CUTOFF 5
+var/failed_db_connections = 0
+
+/proc/setup_database_connection()
+
+	if(failed_db_connections >= FAILED_DB_CONNECTION_CUTOFF)	//If it failed to establish a connection more than 5 times in a row, don't bother attempting to connect anymore.
+		return 0
+
+	if(!dbcon)
+		dbcon = new()
+
+	var/user = config.sql_username
+	var/pass = config.sql_password
+	var/db = config.sql_database
+	var/address = config.sql_hostname
+	var/port = config.sql_port
+
+	dbcon.Connect("dbi:mysql:[db]:[address]:[port]","[user]","[pass]")
+	. = dbcon.IsConnected()
+	if ( . )
+		failed_db_connections = 0	//If this connection succeeded, reset the failed connections counter.
+	else
+		failed_db_connections++		//If it failed, increase the failed connections counter.
+		if(config.sql_enabled)
+			world.log << "SQL error: " + dbcon.ErrorMsg()
+
+	return .
+
+//This proc ensures that the connection to the feedback database (global variable dbcon) is established
+/proc/establish_db_connection()
+	if(failed_db_connections > FAILED_DB_CONNECTION_CUTOFF)
+		return 0
+
+	if(!dbcon || !dbcon.IsConnected())
+		return setup_database_connection()
+	else
+		return 1
+
+#undef FAILED_DB_CONNECTION_CUTOFF

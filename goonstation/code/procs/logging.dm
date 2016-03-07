@@ -7,6 +7,12 @@ Example in-game log call:
 Example out of game log call:
 		logTheThing("diary", src, null, "gibbed everyone ever", "admin")
 */
+
+
+/proc/time_stamp(format = "hh:mm:ss")
+	return time2text(world.timeofday, format)
+
+
 /proc/logTheThing(type, source, target, text, diaryType)
 	var/diaryLogging
 
@@ -194,3 +200,68 @@ proc/log_shot(var/obj/projectile/P,var/obj/SHOT, var/target_is_immune = 0)
 // Does what is says on the tin. We're using the global proc, though (Convair880).
 /proc/log_atmos(var/atom/A as turf|obj|mob)
 	return scan_atmospheric(A, 0, 1)
+
+
+
+/proc/log_admin(text)
+//	admin_log.Add(text)
+	if (config.log_admin)
+		diary << "\[[time_stamp()]]ADMIN: [text]"
+
+/proc/log_adminsay(text)
+	if (config.log_admin)
+		log_admin("ASAY: [text]")
+
+/proc/log_dsay(text)
+	if (config.log_admin)
+		log_admin("DSAY: [text]")
+
+/proc/log_game(text)
+	if (config.log_game)
+		diary << "\[[time_stamp()]]GAME: [text]"
+
+/proc/log_vote(text)
+	if (config.log_vote)
+		diary << "\[[time_stamp()]]VOTE: [text]"
+
+/proc/log_access(text)
+	if (config.log_access)
+		diary << "\[[time_stamp()]]ACCESS: [text]"
+/*
+/proc/log_say(text)
+	if (config.log_say)
+		diary << "\[[time_stamp()]]SAY: [text]"
+
+/proc/log_prayer(text)
+	if (config.log_admin)
+		diary << "\[[time_stamp()]]PRAY: [text]"
+
+/proc/log_law(text)
+	if (config.log_law)
+		diary << "\[[time_stamp()]]LAW: [text]"
+
+/proc/log_ooc(text)
+	if (config.log_ooc)
+		diary << "\[[time_stamp()]]OOC: [text]"
+
+/proc/log_whisper(text)
+	if (config.log_whisper)
+		diary << "\[[time_stamp()]]WHISPER: [text]"
+
+/proc/log_emote(text)
+	if (config.log_emote)
+		diary << "\[[time_stamp()]]EMOTE: [text]"
+
+/proc/log_attack(text)
+	if (config.log_attack)
+		diaryofmeanpeople << "\[[time_stamp()]]ATTACK: [text]"
+
+/proc/log_pda(text)
+	if (config.log_pda)
+		diary << "\[[time_stamp()]]PDA: [text]"
+
+/proc/log_comment(text)
+	if (config.log_pda)
+		//reusing the PDA option because I really don't think news comments are worth a config option
+		diary << "\[[time_stamp()]]COMMENT: [text]"
+*/

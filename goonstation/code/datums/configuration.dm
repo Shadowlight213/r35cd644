@@ -45,6 +45,8 @@
 	var/allow_ai = 1					// allow ai job
 	var/hostedby = null
 	var/respawn = 1
+	var/ban_legacy_system = 0
+	var/panic_buker = 0
 
 	// MySQL
 	var/sql_enabled = 0
@@ -73,7 +75,7 @@
 
 	//Environment
 	var/env = "prod"
-	var/cdn = ""
+	var/cdn = "http://cdn.goonhub.com/"
 	var/disableResourceCache = 0
 
 /datum/configuration/New()

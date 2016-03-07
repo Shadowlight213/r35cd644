@@ -10,8 +10,6 @@ goonstation/data/*
 *.log
 goonstation/adventure
 
-# TODO: ignore config
-config.txt
 
 # Pre-processor related
 node_modules
